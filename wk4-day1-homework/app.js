@@ -28,13 +28,15 @@ let authors = [
             "This recipe is dynamite! My partner usually won’t eat beans but he finished the whole pot (darn was hoping to have some for leftovers haha). This is crowd-pleaser that I am going to add to my regular recipe rotation. Thanks so much, Lisa!"
     },
 ];
+let title = "Food Blog";
+let heading = "Comments";
 
 let post = Vue.component("post", {
     template: "#post",
     props: {
         author: Object
     }
-})
+});
 
 var foodBlog = new Vue({
     el: "#food-blog-app",
@@ -43,6 +45,8 @@ var foodBlog = new Vue({
     },
     data() {
         return {
+            title: title,
+            heading: heading,
             authors: authors,
         };
     },

@@ -91,9 +91,6 @@
             font-size: 0.85em;
         }
     </style>
-
-
-
 </head>
 
 <body>
@@ -101,12 +98,12 @@
     <aside id="rightside"></aside>
     <template id="food-blog-app">
         <div id="container">
-            <header><span>Food Blog</span></header>
+            <header><span>{{title}}</span></header>
             <main>
                 <aside id="photos">
                     <img src="images/chili.jpg" alt="White Chicken Chili" width="180">
                 </aside>
-                <h2>Comments</h2>
+                <h2>{{heading}}</h2>
 
                 <section id="blogposts">
                     <post v-for="author in authors" :author="author" :key="author.date"></post>
@@ -126,7 +123,6 @@
                 {{author.message}}
             </p>
         </div>
-
     </template>
 
     <script src="app.js"></script>
