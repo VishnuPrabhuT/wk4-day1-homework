@@ -90,6 +90,48 @@
             text-align: center;
             font-size: 0.85em;
         }
+
+        .modal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            background: black;
+            color: white;
+            opacity: 0.7;
+            width: 220px;
+            height: 40vh;
+            padding: 2%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-radius: 12px;
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            position: relative;
+        }
+
+        .modal-title>div {
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-size: 0.7rem;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .modal-body>div {
+            margin: 10px 0
+        }
+
+        .post,
+        button {
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -98,6 +140,7 @@
     <aside id="rightside"></aside>
     <template id="food-blog-app">
         <div id="container">
+
             <header><span>{{title}}</span></header>
             <main>
                 <aside id="photos">
@@ -106,14 +149,27 @@
                 <h2>{{heading}}</h2>
 
                 <section id="blogposts">
-                    <post v-for="author in authors" :author="author" :key="author.date"></post>
+                    <post v-for="(author, index) in authors" :author="author" :key="index" :data-name="author.name"
+                        :data-lvl="author.lvl" :data-bio="author.bio">
+                    </post>
                 </section>
+
+                <modal :modal="modal" v-if="visible">
+                    <template #close>
+                        <div @click="closeModal">
+                            X</div>
+                    </template><template #default>
+                        <button @click="closeModal">Close</button>
+                    </template>
+                </modal>
             </main>
             <footer>
                 &copy; Copyright FOOD BLOG
             </footer>
+
         </div>
     </template>
+
     <template id="post">
         <div class="post">
             <span class="author">{{author.name}}</span> —
@@ -125,7 +181,26 @@
         </div>
     </template>
 
-    <script src="app.js"></script>
+    <template id="modal">
+        <div class="modal">
+            <div class="modal-title">{{modal.name}}
+                <slot name="close" />
+            </div>
+            <div class=" modal-body">
+                <div>
+                    <b>Foodie Level:</b> {{modal.lvl}}
+                </div>
+                <div>
+                    <b>Bio:</b> {{modal.bio}}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <slot />
+            </div>
+        </div>
+    </template>
+
+    <script type="module" src="app.js"></script>
 </body>
 
 </html>
